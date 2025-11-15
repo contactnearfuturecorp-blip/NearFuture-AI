@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NearFuture AI - AI-Powered Messenger Automation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A1A2F;
+            --secondary: #00F5FF;
+            --accent: #FFFFFF;
+            --background: #F8F9FA;
+            --text: #2D2D2D;
+            --light-text: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a3a5f 100%);
+            color: var(--accent);
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .section-title p {
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--accent);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+
+        /* How It Works */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 0 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--accent);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a3a5f 100%);
+            color: var(--accent);
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta-section h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--accent);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .steps {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">NearFuture AI</div>
+            <ul class="nav-links">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#features">FEATURES</a></li>
+                <li><a href="#solutions">SOLUTIONS</a></li>
+                <li><a href="#integrations">INTEGRATIONS</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="#demo" class="btn btn-secondary">TRY DEMO</a>
+                <!-- REPLACE THIS WITH YOUR ACTUAL GOOGLE CALENDAR LINK -->
+                <a href="https://calendar.app.google/YOUR-ACTUAL-LINK-HERE" 
+                   target="_blank" 
+                   class="btn btn-primary">BOOK CALL</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Automate Your Sales on Messenger.<br>Welcome to the <span style="color: var(--secondary);">NearFuture</span>.</h1>
+            <p>NearFuture AI turns your Facebook and Instagram inbox into a 24/7 sales engine. Qualify leads, process orders, and support customers—automatically and in their language.</p>
+            <div class="hero-buttons">
+                <!-- REPLACE THIS WITH YOUR ACTUAL GOOGLE CALENDAR LINK -->
+                <a href="https://calendar.app.google/YOUR-ACTUAL-LINK-HERE" 
+                   target="_blank" 
+                   class="btn btn-primary">GET A PERSONALIZED DEMO</a>
+                <a href="#demo" class="btn btn-secondary">SEE IT IN ACTION</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>The Power of NearFuture AI</h2>
+                <p>Everything you need to automate customer conversations and drive sales</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>24/7 Order Processing</h3>
+                    <p>From browsing to checkout, all inside Messenger. Capture and qualify leads, even process payments directly in chat.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>True Multilingual AI</h3>
+                    <p>Communicate seamlessly in English, Spanish, Filipino, Arabic, and more. Break language barriers for global expansion.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Facebook & Instagram Native</h3>
+                    <p>Works directly on Meta's platforms where your customers already are. No additional apps or downloads required.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔥</div>
+                    <h3>Intelligent Lead Scoring</h3>
+                    <p>Automatically identifies and prioritizes hot leads for your sales team. Focus on what matters most.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>24/7 Instant Support</h3>
+                    <p>Automatically answer FAQs on shipping, returns, and product details. Free up your team for complex issues.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Built on Make.ai</h3>
+                    <p>Enterprise-grade automation, without the code. Leverage powerful workflows with our no-code platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="about" style="background-color: var(--accent);">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Get started with NearFuture AI in three simple steps</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect</h3>
+                    <p>Link your Facebook Page and provide essential brand details, products, and FAQs.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Train</h3>
+                    <p>We customize the AI with your specific business needs, tone, and processes.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Convert</h3>
+                    <p>Go live and automate up to 80% of your customer interactions and watch sales grow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tailored for Your Business</h2>
+                <p>Industry-specific solutions that drive real results</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>E-commerce & D2C Brands</h3>
+                    <p>Handle high-volume inquiries, reduce cart abandonment, and provide order tracking automatically. Convert browsers into buyers 24/7.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Lead-Based Businesses</h3>
+                    <p>Qualify inbound leads 24/7, book appointments, and send personalized follow-ups. Perfect for real estate, education, and agencies.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Local Services</h3>
+                    <p>Let customers get quotes, check availability, and book appointments anytime. Scale your service business without scaling overhead.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about NearFuture AI</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How many languages does it support?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>NearFuture AI currently supports over 50 languages including English, Spanish, French, German, Arabic, Filipino, Japanese, Korean, and many more. We're constantly adding new languages based on customer needs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can it really handle complex order questions?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Our AI is trained to handle complex order inquiries including product recommendations, inventory checks, shipping estimates, and even processing returns. For extremely complex issues, it can seamlessly escalate to a human agent.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is it built on a no-code platform? Do I need a developer?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely no coding required! NearFuture AI is built on Make.ai, a powerful no-code platform. Our team handles the technical setup, and you get an intuitive dashboard to manage conversations and update your knowledge base.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How is NearFuture AI different from ManyChat/Chatfuel?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>While other platforms focus on basic chatbots, NearFuture AI provides true conversational AI that understands context and intent. We specialize in complex order processing, multilingual support, and deep platform integrations that basic chatbots can't handle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Automate Your Growth?</h2>
+            <p>Book a free consultation with our AI specialists and see how NearFuture AI can transform your customer conversations.</p>
+            <!-- REPLACE THIS WITH YOUR ACTUAL GOOGLE CALENDAR LINK -->
+            <a href="https://calendar.app.google/YOUR-ACTUAL-LINK-HERE" 
+               target="_blank" 
+               class="btn btn-primary" 
+               style="background-color: var(--secondary); color: var(--primary);">
+                SCHEDULE YOUR FREE CONSULTATION
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>NearFuture AI</h3>
+                    <p style="color: rgba(255,255,255,0.7);">Conversation Automation, Today.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#solutions">Solutions</a></li>
+                        <li><a href="#integrations">Integrations</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul class="footer-links">
+                        <li><a href="#twitter">Twitter</a></li>
+                        <li><a href="#linkedin">LinkedIn</a></li>
+                        <li><a href="#facebook">Facebook</a></li>
+                        <li><a href="#instagram">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 NearFuture AI. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+                
+                // Toggle the plus/minus icon
+                const icon = question.querySelector('span:last-child');
+                icon.textContent = faqItem.classList.contains('active') ? '−' : '+';
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
