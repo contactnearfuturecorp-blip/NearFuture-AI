@@ -35,15 +35,15 @@
       animation:splashFade 3.5s ease forwards;
     }
     #splash img{
-      width:180px;
-      animation:logoPulse 3.2s ease forwards;
-      filter:drop-shadow(0 0 25px rgba(0,229,255,0.65));
+      width:250px;
+      animation:logoPulse 3.5s ease forwards;
+      filter:drop-shadow(0 0 40px rgba(0,229,255,0.75));
     }
     @keyframes logoPulse{
-      0%{opacity:0;transform:scale(.7);}
+      0%{opacity:0;transform:scale(.6);}
       25%{opacity:1;transform:scale(1.05);}
-      60%{opacity:1;transform:scale(1);}
-      100%{opacity:0;transform:scale(.7);}
+      70%{opacity:1;transform:scale(1);}
+      100%{opacity:0;transform:scale(.8);}
     }
     @keyframes splashFade{
       0%,85%{opacity:1;}
@@ -67,7 +67,7 @@
 
     /* 🔥 Bigger logoname (navbar logo) */
     .logo-img{
-      height:70px;  /* make it big but not pushing text */
+      height:70px;  /* big but not pushing text */
       transform: translateY(4px);
       filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
     }
@@ -102,17 +102,22 @@
       background:radial-gradient(circle at center,#02131c 0%,#000 70%);
       position:relative;overflow:hidden;padding-top:6rem;
     }
+
+    /* ✅ LOGO ABOVE HERO TEXT */
     .hero-logo-bg{
-      position:absolute;top:50%;left:50%;
-      transform:translate(-50%,-50%);
-      width:520px;opacity:.18;
-      filter:drop-shadow(0 0 40px rgba(0,229,255,.4));
-      animation:glowFloat 6s ease-in-out infinite alternate;
+      position:relative;
+      width:280px; /* larger hero logo */
+      opacity:1;
+      margin-bottom:2rem;
+      filter:drop-shadow(0 0 40px rgba(0,229,255,.6));
+      animation:glowFloat 7s ease-in-out infinite alternate;
     }
+
     @keyframes glowFloat{
-      from{transform:translate(-50%,-50%) scale(1);}
-      to{transform:translate(-50%,-50%) scale(1.06);}
+      from{transform:scale(1);}
+      to{transform:scale(1.06);}
     }
+
     .hero h1{
       font-size:3.6rem;color:var(--accent);
       text-shadow:0 0 30px rgba(0,229,255,.5);
