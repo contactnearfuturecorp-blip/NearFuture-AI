@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NearFuture AI</title>
+  <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0A1A2F;
+      --secondary: #00E5FF;
+      --accent: #FFFFFF;
+      --background: #000000;
+      --text: #E6F7FF;
+      --light-text: #A8C7D8;
+      --glow: 0 0 30px rgba(0, 229, 255, 0.45);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,sans-serif;
+      background-color:var(--background);
+      color:var(--text);
+      overflow-x:hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Splash screen */
+    #splash{
+      position:fixed;inset:0;
+      background:#000;
+      display:flex;justify-content:center;align-items:center;
+      z-index:9999;
+      animation:splashFade 3.5s ease forwards;
+    }
+    #splash img{
+      width:180px;
+      animation:logoPulse 3.2s ease forwards;
+      filter:drop-shadow(0 0 25px rgba(0,229,255,0.65));
+    }
+    @keyframes logoPulse{
+      0%{opacity:0;transform:scale(.7);}
+      25%{opacity:1;transform:scale(1.05);}
+      60%{opacity:1;transform:scale(1);}
+      100%{opacity:0;transform:scale(.7);}
+    }
+    @keyframes splashFade{
+      0%,85%{opacity:1;}
+      100%{opacity:0;visibility:hidden;}
+    }
+
+    /* Navbar */
+    nav{
+      position:fixed;top:0;width:100%;
+      background:rgba(0,0,0,.6);
+      backdrop-filter:blur(14px);
+      padding:1rem 0;
+      z-index:1000;
+      transition:background .3s;
+    }
+    nav:hover{background:rgba(0,0,0,.8);}
+    .nav-container{
+      max-width:1200px;margin:auto;
+      display:flex;justify-content:space-between;align-items:center;
+    }
+
+    /* 🔥 Bigger logoname (navbar logo) */
+    .logo-img{
+      height:100px;  /* make it big but not pushing text */
+      transform: translateY(4px);
+      filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
+    }
+
+    .nav-links{
+      list-style:none;display:flex;gap:2rem;
+    }
+    .nav-links a{
+      color:var(--light-text);
+      text-decoration:none;font-weight:500;font-size:.95rem;
+      transition:.2s;
+    }
+    .nav-links a:hover{color:var(--secondary);}
+    .btn{
+      padding:.7rem 1.5rem;border-radius:8px;font-weight:600;
+      text-decoration:none;transition:.3s;
+    }
+    .btn-primary{
+      background:var(--secondary);color:#000;box-shadow:var(--glow);
+    }
+    .btn-primary:hover{background:#00bcd4;}
+    .btn-secondary{
+      border:2px solid var(--secondary);color:var(--secondary);
+    }
+    .btn-secondary:hover{background:var(--secondary);color:#000;}
+
+    /* Hero */
+    .hero{
+      min-height:100vh;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;
+      background:radial-gradient(circle at center,#02131c 0%,#000 70%);
+      position:relative;overflow:hidden;padding-top:6rem;
+    }
+    .hero-logo-bg{
+      position:absolute;top:50%;left:50%;
+      transform:translate(-50%,-50%);
+      width:520px;opacity:.18;
+      filter:drop-shadow(0 0 40px rgba(0,229,255,.4));
+      animation:glowFloat 6s ease-in-out infinite alternate;
+    }
+    @keyframes glowFloat{
+      from{transform:translate(-50%,-50%) scale(1);}
+      to{transform:translate(-50%,-50%) scale(1.06);}
+    }
+    .hero h1{
+      font-size:3.6rem;color:var(--accent);
+      text-shadow:0 0 30px rgba(0,229,255,.5);
+      z-index:2;
+    }
+    .hero p{
+      margin-top:1rem;opacity:.85;max-width:620px;margin-left:auto;margin-right:auto;
+      z-index:2;
+    }
+    .hero-buttons{
+      margin-top:2rem;display:flex;gap:1rem;justify-content:center;z-index:2;
+    }
+
+    /* Sections */
+    section{padding:100px 0;text-align:center;}
+    .section-title h2{font-size:2.4rem;color:var(--accent);}
+    .section-title p{max-width:550px;margin:1rem auto;opacity:.65;}
+    .features-grid{
+      max-width:1200px;margin:auto;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:2rem;
+    }
+    .feature-card{
+      background:rgba(255,255,255,.02);
+      padding:2rem;border-radius:12px;
+      border:1px solid rgba(0,229,255,.15);
+      transition:.3s;
+    }
+    .feature-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 0 28px rgba(0,229,255,.2);
+    }
+    .feature-icon{font-size:2.8rem;color:var(--secondary);text-shadow:var(--glow);}
+    .feature-card h3{color:var(--secondary);margin:.8rem 0;}
+
+    .steps{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;}
+    .step{max-width:250px;}
+    .step-number{
+      width:56px;height:56px;margin:0 auto 1rem;
+      display:flex;justify-content:center;align-items:center;
+      border-radius:12px;
+      background:linear-gradient(180deg,#00E5FF,#0099cc);
+      color:#000;font-weight:800;
+      box-shadow:0 8px 20px rgba(0,229,255,.25);
+    }
+
+    /* FAQ */
+    .faq-container{max-width:800px;margin:auto;text-align:left;}
+    .faq-item{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.1);
+      padding:1.5rem;border-radius:12px;margin-bottom:1rem;
+      transition:.3s;
+    }
+    .faq-item:hover{border-color:rgba(0,229,255,.3);}
+    .faq-question{display:flex;justify-content:space-between;cursor:pointer;color:var(--secondary);}
+    .faq-answer{display:none;margin-top:.8rem;opacity:.8;}
+    .faq-item.active .faq-answer{display:block;}
+
+    /* CTA */
+    .cta-section{
+      background:linear-gradient(180deg,#00151f,#000);
+      padding:100px 0;text-align:center;
+    }
+
+    /* Footer */
+    footer{background:#000;color:#4aaec7;padding:60px 0 40px;text-align:center;}
+    .footer-links a{color:#4aaec7;text-decoration:none;}
+    .footer-links a:hover{color:#00E5FF;}
+
+    /* Smooth scroll reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Splash -->
+  <div id="splash"><img src="logo.png" alt="NearFuture AI logo"></div>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-container">
+      <img src="logoname.png" class="logo-img" alt="NearFuture AI">
+      <ul class="nav-links">
+        <li><a href="#home">Overview</a></li>
+        <li><a href="#about">How It Works</a></li>
+        <li><a href="#features">Capabilities</a></li>
+        <li><a href="#solutions">Use Cases</a></li>
+        <li><a href="#integrations">Workflow Automation</a></li>
+        <li><a href="#faq">Support Center</a></li>
+      </ul>
+      <div class="nav-buttons">
+        <a href="https://m.me/nearfutureai" target="_blank" class="btn btn-secondary">Try Demo</a>
+        <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-primary">Book Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero reveal" id="home">
+    <img src="logo.png" class="hero-logo-bg" alt="">
+    <h1>Automate Your Sales on Messenger.<br>Welcome to the <span style="color:var(--secondary);">NearFuture</span>.</h1>
+    <p>NearFuture AI turns your Facebook and Instagram inbox into a 24/7 sales engine. Qualify leads, process orders, and support customers—automatically and in their language.</p>
+    <div class="hero-buttons">
+      <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-primary">Get a Personalized Demo</a>
+      <a href="https://m.me/nearfutureai" target="_blank" class="btn btn-secondary">See It in Action</a>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section id="features" class="reveal">
+    <div class="section-title">
+      <h2>Capabilities</h2>
+      <p>Everything you need to automate customer conversations and drive sales</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal"><div class="feature-icon">💬</div><h3>24/7 Order Processing</h3><p>From browsing to checkout, all inside Messenger.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🌐</div><h3>True Multilingual AI</h3><p>Communicate seamlessly across languages.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">📱</div><h3>Facebook & Instagram Native</h3><p>Works where your customers already are.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🔥</div><h3>Intelligent Lead Scoring</h3><p>Identify and prioritize hot leads automatically.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">⚡</div><h3>24/7 Instant Support</h3><p>Automated FAQs and customer support anytime.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🔧</div><h3>Built on Make.ai</h3><p>Enterprise-grade automation, no code needed.</p></div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="about" class="reveal" style="background:rgba(255,255,255,0.02);">
+    <div class="section-title"><h2>How It Works</h2><p>Get started in three simple steps</p></div>
+    <div class="steps">
+      <div class="step reveal"><div class="step-number">1</div><h3>Connect</h3><p>Link your Facebook Page and add your details.</p></div>
+      <div class="step reveal"><div class="step-number">2</div><h3>Train</h3><p>We configure the AI with your tone and workflow.</p></div>
+      <div class="step reveal"><div class="step-number">3</div><h3>Convert</h3><p>Automate up to 80% of conversations and watch sales grow.</p></div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section id="solutions" class="reveal">
+    <div class="section-title"><h2>Use Cases</h2><p>Industry-specific solutions that drive results</p></div>
+    <div class="features-grid">
+      <div class="feature-card reveal"><h3>E-commerce & D2C Brands</h3><p>Handle inquiries, reduce cart abandonment, track orders.</p></div>
+      <div class="feature-card reveal"><h3>Lead-Based Businesses</h3><p>Qualify leads, book appointments, send follow-ups.</p></div>
+      <div class="feature-card reveal"><h3>Local Services</h3><p>Let customers book and get quotes anytime.</p></div>
+    </div>
+  </section>
+
+  <!-- Support Center -->
+  <section id="faq" class="reveal" style="background:rgba(255,255,255,0.02);">
+    <div class="section-title"><h2>Support Center</h2><p>Everything you need to know about NearFuture AI</p></div>
+    <div class="faq-container">
+      <div class="faq-item reveal"><div class="faq-question"><span>How many languages does it support?</span><span>+</span></div><div class="faq-answer"><p>Over 50 languages including English, Spanish, Filipino, Arabic, and more.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-question"><span>Can it handle complex orders?</span><span>+</span></div><div class="faq-answer"><p>Yes, it can process inquiries, check inventory, and manage returns.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-question"><span>Is it no-code?</span><span>+</span></div><div class="faq-answer"><p>Yes — built on Make.ai, no coding required.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-question"><span>How is it different from ManyChat?</span><span>+</span></div><div class="faq-answer"><p>NearFuture AI understands intent and supports multilingual automation.</p></div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section reveal">
+    <h2>Ready to Automate Your Growth?</h2>
+    <p>Book a free consultation and see how NearFuture AI transforms your sales.</p>
+    <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-primary">Schedule Your Free Consultation</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 NearFuture AI. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // FAQ toggle
+    document.querySelectorAll('.faq-question').forEach(q=>{
+      q.addEventListener('click',()=>{
+        const item=q.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+
+    // Scroll reveal
+    document.addEventListener("DOMContentLoaded", () => {
+      const reveals = document.querySelectorAll(".reveal");
+      const revealOnScroll = () => {
+        const triggerPoint = window.innerHeight * 0.85;
+        reveals.forEach((el) => {
+          const rect = el.getBoundingClientRect().top;
+          if (rect < triggerPoint) el.classList.add("visible");
+        });
+      };
+      window.addEventListener("scroll", revealOnScroll);
+      revealOnScroll();
+    });
+  </script>
+</body>
+</html>
