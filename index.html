@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>NearFuture AI</title>
   <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
@@ -21,12 +21,16 @@
     }
 
     *{margin:0;padding:0;box-sizing:border-box;}
+    img{max-width:100%;height:auto;display:block;}
+
     body{
       font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,sans-serif;
       background-color:var(--background);
       color:var(--text);
       overflow-x:hidden;
       scroll-behavior:smooth;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
     /* Splash */
@@ -58,24 +62,32 @@
     .nav-container{
       max-width:1200px;margin:auto;
       display:flex;justify-content:space-between;align-items:center;
+      gap:1rem;
       padding:0 16px;
     }
     .logo-img{
       height:70px;
+      flex:0 0 auto;
       filter:drop-shadow(0 0 10px rgba(0,229,255,.4));
     }
-    .nav-links{list-style:none;display:flex;gap:2rem;}
+    .nav-links{
+      list-style:none;display:flex;gap:2rem;
+      align-items:center;justify-content:center;
+      flex:1 1 auto;
+    }
     .nav-links a{
       color:var(--light-text);text-decoration:none;font-weight:500;font-size:.95rem;transition:.2s;
+      padding:.25rem .1rem;
     }
     .btn{
       padding:.7rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;transition:.3s;
-      display:inline-block;
+      display:inline-block; white-space:nowrap;
     }
     .btn-primary{background:var(--secondary);color:#000;box-shadow:var(--glow);}
     .btn-secondary{border:2px solid var(--secondary);color:var(--secondary);}
+    .nav-buttons{display:flex;gap:.6rem;flex:0 0 auto;}
 
-    /* NEW HERO (GANDA VERSION) */
+    /* HERO */
     .hero{
       min-height:100vh;
       display:flex;
@@ -83,7 +95,7 @@
       justify-content:center;
       align-items:center;
       text-align:center;
-      padding-top:7rem;
+      padding:7rem 16px 3rem;
       background: radial-gradient(circle at center, #06202f 0%, #000 70%);
       position:relative;
     }
@@ -94,49 +106,36 @@
       filter:drop-shadow(0 0 25px rgba(0,229,255,0.65));
       animation:floatLogo 6s ease-in-out infinite alternate;
     }
-
-    @keyframes floatLogo {
-      from { transform:translateY(0); }
-      to   { transform:translateY(-10px); }
-    }
+    @keyframes floatLogo { from { transform:translateY(0); } to { transform:translateY(-10px); } }
 
     .hero h1{
-      font-size:3.8rem;
+      font-size: clamp(2.2rem, 3.2vw + 1.6rem, 3.8rem);
       font-weight:700;
       line-height:1.15;
       color:white;
       text-shadow:0 0 25px rgba(0,229,255,.35);
+      letter-spacing:.2px;
     }
-
-    .hero h1 span{
-      color:var(--secondary);
-    }
-
+    .hero h1 span{color:var(--secondary);}
     .hero p{
-      margin-top:1rem;
-      font-size:1.1rem;
-      opacity:.85;
-      max-width:720px;
+      margin-top:1rem;font-size:clamp(1rem, .6vw + .9rem, 1.1rem);
+      opacity:.88;max-width:720px;
     }
-
     .hero-buttons{
-      margin-top:2rem;
-      display:flex;
-      gap:1rem;
-      justify-content:center;
-      flex-wrap:wrap;
+      margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
     }
 
-    /* Sections base */
+    /* BASE SECTIONS */
     section{padding:100px 0;text-align:center;padding-left:16px;padding-right:16px;}
-    .section-title h2{font-size:2.4rem;color:var(--accent);}
+    .section-title h2{font-size:clamp(1.8rem, 1.2vw + 1.4rem, 2.4rem);color:var(--accent);}
     .section-title p{max-width:620px;margin:1rem auto;opacity:.7;}
 
-    /* Cards / grids */
+    /* GRID */
     .grid{max-width:1200px;margin:auto;display:grid;gap:2rem;}
     .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
     .grid-4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
 
+    /* CARDS */
     .card{
       background:var(--card-bg);
       border:1px solid var(--border);
@@ -146,69 +145,123 @@
     }
     .card:hover{transform:translateY(-6px);}
 
+    /* STEPS */
     .steps{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;max-width:1100px;margin:2rem auto 0;}
     .step{
-      background:var(--card-bg);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:2rem;
-      max-width:320px;
-      flex:1;
+      background:var(--card-bg);border:1px solid var(--border);
+      border-radius:14px;padding:2rem;max-width:320px;flex:1;min-width:260px;
+      transition:.3s;
     }
-
+    .step:hover{transform:translateY(-6px);}
     .step-number{
-      width:56px;height:56px;margin:0 auto 1rem;
-      display:flex;justify-content:center;align-items:center;
-      border-radius:12px;
-      background:linear-gradient(180deg,#00E5FF,#0099cc);
-      color:#000;font-weight:800;
-      box-shadow:0 8px 20px rgba(0,229,255,.25);
+      width:56px;height:56px;margin:0 auto 1rem;display:flex;justify-content:center;align-items:center;
+      border-radius:12px;background:linear-gradient(180deg,#00E5FF,#0099cc);
+      color:#000;font-weight:800;box-shadow:0 8px 20px rgba(0,229,255,.25);
     }
 
-    /* Who it's for */
+    /* WHO IT’S FOR */
     .who-card{
       background:var(--card-bg);border:1px solid var(--border);
-      border-radius:14px;padding:1.3rem;
-      display:flex;gap:.9rem;align-items:center;justify-content:center;
+      border-radius:14px;padding:1.3rem;display:flex;gap:.9rem;align-items:center;justify-content:center;
     }
 
-    .who-emoji{font-size:1.3rem;margin-right:.2rem;}
-
-    /* Plans */
-    .plans{max-width:1200px;margin:2.5rem auto 0;
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;}
+    /* PLANS — FINAL, PREMIUM */
+    .plans{
+      max-width:1200px;margin:2.5rem auto 0;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;
+    }
     .plan{
-      border-radius:16px;padding:2rem;
-      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-      backdrop-filter:blur(12px);
-      border:1px solid rgba(255,255,255,.12);
-      text-align:left;
-      position:relative;
+      position:relative;overflow:hidden;border-radius:16px;padding:2rem;text-align:left;
+      background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,0.18);
+      box-shadow:0 25px 45px rgba(0,0,0,0.55), inset 0 0 25px rgba(0,229,255,0.06);
+      transition:.3s;
+    }
+    .plan:hover{
+      transform:translateY(-6px);
+      box-shadow:0 35px 55px rgba(0,0,0,0.65), inset 0 0 30px rgba(0,229,255,0.10);
     }
     .plan .badge{
-      position:absolute;top:16px;right:16px;
-      font-size:.8rem;padding:.35rem .6rem;border-radius:999px;
-      border:1px solid rgba(0,229,255,.35);
-      color:var(--secondary);
-      background:rgba(0,229,255,.08);
+      position:absolute;top:16px;right:16px;font-size:.8rem;padding:.35rem .6rem;border-radius:999px;
+      border:1px solid rgba(0,229,255,.35);color:var(--secondary);background:rgba(0,229,255,.08);
     }
+    .plan h3{font-size:1.6rem;margin:0 0 .35rem;color:var(--accent);}
+    .plan small{opacity:.75;}
+    .plan ul{margin:1rem 0 1.4rem 0;padding-left:1.1rem;line-height:1.8;}
+    .plan ul li{margin:.25rem 0;}
 
-    /* Why choose us */
-    .why-grid{max-width:1000px;margin:2rem auto 0;
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;}
+    /* WHY */
+    .why-grid{
+      max-width:1000px;margin:2rem auto 0;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;
+    }
     .why-item{
       background:var(--glass);border:1px solid rgba(255,255,255,.12);
-      padding:1rem 1.1rem;border-radius:12px;
-      text-align:left;display:flex;gap:.6rem;
+      padding:1rem 1.1rem;border-radius:12px;text-align:left;display:flex;gap:.6rem;align-items:flex-start;
     }
     .why-item .tick{color:#7CFFA5;font-size:1.2rem;margin-top:.1rem;}
 
+    /* CTA + Footer */
+    .cta-section{background:linear-gradient(180deg,#00151f,#000);padding:100px 0;text-align:center;}
     footer{background:#000;color:#4aaec7;padding:60px 0 40px;text-align:center;}
+    footer a{color:#4aaec7;text-decoration:none;}
+    footer a:hover{color:#00E5FF;}
 
+    /* Reveal */
     .reveal{opacity:0;transform:translateY(24px);transition:.9s;}
     .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* ======= RESPONSIVE: NO COMPROMISE LOOK ======= */
+
+    /* Make nav links smoothly scrollable on small screens without breaking layout */
+    @media (max-width: 960px){
+      .nav-links{
+        gap:1.25rem;
+        overflow-x:auto; overflow-y:hidden; white-space:nowrap;
+        padding-bottom:8px; -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+      .nav-links::-webkit-scrollbar{display:none;}
+      .logo-img{height:64px;}
+    }
+
+    @media (max-width: 820px){
+      .logo-img{height:60px;}
+      .btn{padding:.65rem 1.2rem;}
+      .nav-buttons{gap:.5rem;}
+    }
+
+    @media (max-width: 720px){
+      .nav-container{gap:.75rem;}
+      .logo-img{height:56px;}
+      .hero-logo-top{width:170px;}
+      .section{padding-left:14px;padding-right:14px;}
+    }
+
+    /* Mobile “stacked but thick” plans + generous padding to keep premium feel */
+    @media (max-width: 640px){
+      .plans{grid-template-columns:1fr;gap:1.4rem;max-width:680px;padding-left:8px;padding-right:8px;}
+      .plan{padding:1.8rem;border-radius:18px;}
+      .plan h3{font-size:1.5rem;}
+      .plan ul{line-height:1.75;}
+      .hero-buttons{gap:.8rem}
+      .card{padding:1.4rem;}
+      .step{max-width:100%;}
+      .grid-4{grid-template-columns:1fr;}
+      .grid-3{grid-template-columns:1fr;}
+    }
+
+    /* Ultra small phones, preserve hero presence */
+    @media (max-width: 380px){
+      .hero-logo-top{width:160px;}
+      .hero h1{letter-spacing:0}
+      .logo-img{height:52px;}
+      .btn{padding:.6rem 1rem;}
+    }
   </style>
 </head>
+
 <body>
 
 <!-- Splash -->
@@ -233,15 +286,15 @@
   </div>
 </nav>
 
-<!-- HERO (GANDA VERSION) -->
+<!-- HERO -->
 <section class="hero" id="home">
-  <img src="logo.png" class="hero-logo-top" alt="">
-  
+  <img src="logo.png" class="hero-logo-top" alt="NearFuture logo">
+
   <h1>Automate Your Sales on Messenger.<br>
       Welcome to the <span>NearFuture</span>.</h1>
 
   <p>
-    NearFuture AI turns your Facebook and Instagram inbox into a 24/7 sales engine.  
+    NearFuture AI turns your Facebook and Instagram inbox into a 24/7 sales engine.
     Qualify leads, process orders, and support customers—automatically and in their language.
   </p>
 
@@ -279,7 +332,7 @@
   </div>
 </section>
 
-<!-- WHAT OUR AUTOMATION DOES -->
+<!-- FEATURES -->
 <section id="features" class="reveal" style="background:rgba(255,255,255,0.02);">
   <div class="section-title">
     <h2>What Our Automation Does</h2>
@@ -287,24 +340,24 @@
   </div>
 
   <div class="grid grid-4" style="max-width:1200px;margin:auto;">
-    <div class="card"><div class="icon">💬</div><h3>24/7 Auto-Reply</h3><p>Instant responses to every inquiry — day or night.</p></div>
-    <div class="card"><div class="icon">🛒</div><h3>Automated Orders</h3><p>Order inside Messenger — items, delivery info, confirmation.</p></div>
-    <div class="card"><div class="icon">📋</div><h3>Interactive Menus</h3><p>Buttons like Order Now, Change Language, Ask a Question.</p></div>
-    <div class="card"><div class="icon">🌐</div><h3>Multi-Language</h3><p>English, Filipino, Taglish — switches automatically.</p></div>
+    <div class="card"><h3>💬 24/7 Auto-Reply</h3><p>Instant responses—day or night.</p></div>
+    <div class="card"><h3>🛒 Automated Orders</h3><p>Order inside Messenger.</p></div>
+    <div class="card"><h3>📋 Interactive Menus</h3><p>Order Now, FAQ, etc.</p></div>
+    <div class="card"><h3>🌐 Multi-Language</h3><p>EN / TL / Taglish.</p></div>
 
-    <div class="card"><div class="icon">📚</div><h3>FAQ Automation</h3><p>Answers prices, delivery areas, hours, payment methods.</p></div>
-    <div class="card"><div class="icon">🧾</div><h3>Order Confirmation</h3><p>Summary + unique ID sent after checkout.</p></div>
-    <div class="card"><div class="icon">📦</div><h3>Customer Data</h3><p>Save name, contact, and history for repeat orders.</p></div>
-    <div class="card"><div class="icon">📊</div><h3>Basic Analytics</h3><p>Track orders, trends, and peak hours.</p></div>
+    <div class="card"><h3>📚 FAQ Automation</h3><p>Answers instantly.</p></div>
+    <div class="card"><h3>🧾 Order Confirmation</h3><p>Summary + ID.</p></div>
+    <div class="card"><h3>📦 Customer Data</h3><p>Name + history.</p></div>
+    <div class="card"><h3>📊 Basic Analytics</h3><p>Trends & peak hours.</p></div>
 
-    <div class="card"><div class="icon">🧼</div><h3>Complaints</h3><p>Collect issues (refunds, wrong items, delays) with details.</p></div>
-    <div class="card"><div class="icon">🏷️</div><h3>Smart Tagging</h3><p>Label new, returning, or pending customers.</p></div>
-    <div class="card"><div class="icon">📤</div><h3>Promo Broadcast</h3><p>Send promos, reminders, and announcements.</p></div>
-    <div class="card"><div class="icon">📅</div><h3>Appointments</h3><p>Let customers pick date/time/service easily.</p></div>
+    <div class="card"><h3>🧼 Complaints</h3><p>Refund / issues.</p></div>
+    <div class="card"><h3>🏷️ Smart Tagging</h3><p>New / returning.</p></div>
+    <div class="card"><h3>📤 Promo Broadcast</h3><p>Send promos.</p></div>
+    <div class="card"><h3>📅 Appointments</h3><p>Book date/time.</p></div>
   </div>
 </section>
 
-<!-- WHO IT'S FOR -->
+<!-- WHO -->
 <section id="who" class="reveal">
   <div class="section-title">
     <h2>Who It’s For</h2>
@@ -312,19 +365,17 @@
   </div>
 
   <div class="grid grid-3" style="max-width:1000px;margin:auto;">
-    <div class="who-card"><span class="who-emoji">🍔</span> Food & beverage businesses</div>
-    <div class="who-card"><span class="who-emoji">🛍️</span> Online sellers</div>
-    <div class="who-card"><span class="who-emoji">💆‍♀️</span> Salons & clinics</div>
-    <div class="who-card"><span class="who-emoji">🧰</span> Repair & service shops</div>
-    <div class="who-card"><span class="who-emoji">🏡</span> Real estate & inquiries</div>
-    <div class="who-card"><span class="who-emoji">🎥</span> Influencers & creators</div>
-    <div class="who-card" style="grid-column:1/-1;max-width:520px;margin:0 auto;">
-      <span class="who-emoji">💬</span> Local MSMEs of any kind
-    </div>
+    <div class="who-card">🍔 Food & beverage businesses</div>
+    <div class="who-card">🛍️ Online sellers</div>
+    <div class="who-card">💆‍♀️ Salons & clinics</div>
+    <div class="who-card">🧰 Repair & service shops</div>
+    <div class="who-card">🏡 Real estate & inquiries</div>
+    <div class="who-card">🎥 Influencers & creators</div>
+    <div class="who-card" style="grid-column:1/-1;max-width:520px;margin:0 auto;">💬 Local MSMEs of any kind</div>
   </div>
 </section>
 
-<!-- PLANS -->
+<!-- PLANS (stacked-but-thick on mobile) -->
 <section id="plans" class="reveal" style="background:rgba(255,255,255,0.02);">
   <div class="section-title">
     <h2>Plans</h2>
@@ -332,11 +383,11 @@
   </div>
 
   <div class="plans">
+    <!-- STARTER -->
     <div class="plan">
       <span class="badge">Starter</span>
       <h3>“Simple Automation Response”</h3>
       <small>Perfect for small businesses.</small>
-
       <ul>
         <li>Auto-reply system</li>
         <li>Order-taking flow</li>
@@ -346,15 +397,14 @@
         <li>Customer database</li>
         <li>Basic analytics</li>
       </ul>
-
       <a href="https://m.me/nearfutureai" class="btn btn-primary">💬 Message Us</a>
     </div>
 
+    <!-- PRO -->
     <div class="plan">
       <span class="badge">Pro</span>
       <h3>“Advanced Automation for Growth”</h3>
       <small>For scaling businesses.</small>
-
       <ul>
         <li>All Starter features</li>
         <li>Advanced analytics dashboard</li>
@@ -366,13 +416,12 @@
         <li>Conversation memory</li>
         <li>Priority setup & support</li>
       </ul>
-
       <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" class="btn btn-secondary">📅 Book a Free Demo</a>
     </div>
   </div>
 </section>
 
-<!-- WHY CHOOSE US -->
+<!-- WHY US -->
 <section id="why" class="reveal">
   <div class="section-title">
     <h2>Why Choose NearFuture AI</h2>
@@ -415,7 +464,7 @@
   </div>
 </section>
 
-<!-- CTA BOTTOM -->
+<!-- CTA -->
 <section class="cta-section reveal" id="cta">
   <h2>Ready to Automate Your Messenger?</h2>
   <p>Let your page handle orders while you sleep.</p>
@@ -430,10 +479,10 @@
 <footer>
   <p>&copy; 2025 NearFuture AI. Smart chat automation for modern businesses.</p>
   <p style="margin-top:.5rem;opacity:.7;">
-    <a href="https://facebook.com/nearfutureai" style="color:#4aaec7;text-decoration:none;">Facebook</a> •
-    <a href="https://m.me/nearfutureai" style="color:#4aaec7;text-decoration:none;">Messenger</a> •
-    <a href="mailto:nearfutureai@gmail.com" style="color:#4aaec7;text-decoration:none;">Email</a> •
-    <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" style="color:#4aaec7;text-decoration:none;">Book Demo</a>
+    <a href="https://facebook.com/nearfutureai">Facebook</a> •
+    <a href="https://m.me/nearfutureai">Messenger</a> •
+    <a href="mailto:nearfutureai@gmail.com">Email</a> •
+    <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8">Book Demo</a>
   </p>
 </footer>
 
@@ -444,8 +493,7 @@
     const onScroll = () => {
       const trigger = window.innerHeight * 0.88;
       reveals.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < trigger) el.classList.add("visible");
+        if (el.getBoundingClientRect().top < trigger) el.classList.add("visible");
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -455,6 +503,3 @@
 
 </body>
 </html>
-
-
-
