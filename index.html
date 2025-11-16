@@ -15,6 +15,9 @@
       --text: #E6F7FF;
       --light-text: #A8C7D8;
       --glow: 0 0 30px rgba(0, 229, 255, 0.45);
+      --card-bg: rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.06);
+      --border: rgba(0,229,255,.18);
     }
 
     *{margin:0;padding:0;box-sizing:border-box;}
@@ -23,20 +26,17 @@
       background-color:var(--background);
       color:var(--text);
       overflow-x:hidden;
-      scroll-behavior: smooth;
+      scroll-behavior:smooth;
     }
 
-    /* Splash screen */
+    /* Splash */
     #splash{
-      position:fixed;inset:0;
-      background:#000;
+      position:fixed;inset:0;background:#000;
       display:flex;justify-content:center;align-items:center;
-      z-index:9999;
-      animation:splashFade 3.5s ease forwards;
+      z-index:9999;animation:splashFade 3.5s ease forwards;
     }
     #splash img{
-      width:250px;
-      animation:logoPulse 3.5s ease forwards;
+      width:250px;animation:logoPulse 3.5s ease forwards;
       filter:drop-shadow(0 0 40px rgba(0,229,255,0.75));
     }
     @keyframes logoPulse{
@@ -45,10 +45,7 @@
       70%{opacity:1;transform:scale(1);}
       100%{opacity:0;transform:scale(.8);}
     }
-    @keyframes splashFade{
-      0%,85%{opacity:1;}
-      100%{opacity:0;visibility:hidden;}
-    }
+    @keyframes splashFade{0%,85%{opacity:1;}100%{opacity:0;visibility:hidden;}}
 
     /* Navbar */
     nav{
@@ -57,104 +54,108 @@
       backdrop-filter:blur(14px);
       padding:1rem 0;
       z-index:1000;
-      transition:background .3s;
     }
-    nav:hover{background:rgba(0,0,0,.8);}
     .nav-container{
       max-width:1200px;margin:auto;
       display:flex;justify-content:space-between;align-items:center;
+      padding:0 16px;
     }
-
-    /* 🔥 Bigger logoname (navbar logo) */
     .logo-img{
-      height:70px;  /* big but not pushing text */
-      transform: translateY(4px);
-      filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
+      height:70px;
+      filter:drop-shadow(0 0 10px rgba(0,229,255,.4));
     }
-
-    .nav-links{
-      list-style:none;display:flex;gap:2rem;
-    }
+    .nav-links{list-style:none;display:flex;gap:2rem;}
     .nav-links a{
-      color:var(--light-text);
-      text-decoration:none;font-weight:500;font-size:.95rem;
-      transition:.2s;
+      color:var(--light-text);text-decoration:none;font-weight:500;font-size:.95rem;transition:.2s;
     }
-    .nav-links a:hover{color:var(--secondary);}
     .btn{
-      padding:.7rem 1.5rem;border-radius:8px;font-weight:600;
-      text-decoration:none;transition:.3s;
+      padding:.7rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;transition:.3s;
+      display:inline-block;
     }
-    .btn-primary{
-      background:var(--secondary);color:#000;box-shadow:var(--glow);
-    }
-    .btn-primary:hover{background:#00bcd4;}
-    .btn-secondary{
-      border:2px solid var(--secondary);color:var(--secondary);
-    }
-    .btn-secondary:hover{background:var(--secondary);color:#000;}
+    .btn-primary{background:var(--secondary);color:#000;box-shadow:var(--glow);}
+    .btn-secondary{border:2px solid var(--secondary);color:var(--secondary);}
 
-    /* Hero */
+    /* NEW HERO (GANDA VERSION) */
     .hero{
       min-height:100vh;
-      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
       text-align:center;
-      background:radial-gradient(circle at center,#02131c 0%,#000 70%);
-      position:relative;overflow:hidden;padding-top:6rem;
-    }
-
-    /* ✅ LOGO ABOVE HERO TEXT */
-    .hero-logo-bg{
+      padding-top:7rem;
+      background: radial-gradient(circle at center, #06202f 0%, #000 70%);
       position:relative;
-      width:280px; /* larger hero logo */
-      opacity:1;
-      margin-bottom:2rem;
-      filter:drop-shadow(0 0 40px rgba(0,229,255,.6));
-      animation:glowFloat 7s ease-in-out infinite alternate;
     }
 
-    @keyframes glowFloat{
-      from{transform:scale(1);}
-      to{transform:scale(1.06);}
+    .hero-logo-top{
+      width:180px;
+      margin-bottom:1.5rem;
+      filter:drop-shadow(0 0 25px rgba(0,229,255,0.65));
+      animation:floatLogo 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatLogo {
+      from { transform:translateY(0); }
+      to   { transform:translateY(-10px); }
     }
 
     .hero h1{
-      font-size:3.6rem;color:var(--accent);
-      text-shadow:0 0 30px rgba(0,229,255,.5);
-      z-index:2;
-    }
-    .hero p{
-      margin-top:1rem;opacity:.85;max-width:620px;margin-left:auto;margin-right:auto;
-      z-index:2;
-    }
-    .hero-buttons{
-      margin-top:2rem;display:flex;gap:1rem;justify-content:center;z-index:2;
+      font-size:3.8rem;
+      font-weight:700;
+      line-height:1.15;
+      color:white;
+      text-shadow:0 0 25px rgba(0,229,255,.35);
     }
 
-    /* Sections */
-    section{padding:100px 0;text-align:center;}
-    .section-title h2{font-size:2.4rem;color:var(--accent);}
-    .section-title p{max-width:550px;margin:1rem auto;opacity:.65;}
-    .features-grid{
-      max-width:1200px;margin:auto;
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:2rem;
+    .hero h1 span{
+      color:var(--secondary);
     }
-    .feature-card{
-      background:rgba(255,255,255,.02);
-      padding:2rem;border-radius:12px;
-      border:1px solid rgba(0,229,255,.15);
+
+    .hero p{
+      margin-top:1rem;
+      font-size:1.1rem;
+      opacity:.85;
+      max-width:720px;
+    }
+
+    .hero-buttons{
+      margin-top:2rem;
+      display:flex;
+      gap:1rem;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    /* Sections base */
+    section{padding:100px 0;text-align:center;padding-left:16px;padding-right:16px;}
+    .section-title h2{font-size:2.4rem;color:var(--accent);}
+    .section-title p{max-width:620px;margin:1rem auto;opacity:.7;}
+
+    /* Cards / grids */
+    .grid{max-width:1200px;margin:auto;display:grid;gap:2rem;}
+    .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+    .grid-4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+
+    .card{
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:1.6rem;
       transition:.3s;
     }
-    .feature-card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 0 28px rgba(0,229,255,.2);
-    }
-    .feature-icon{font-size:2.8rem;color:var(--secondary);text-shadow:var(--glow);}
-    .feature-card h3{color:var(--secondary);margin:.8rem 0;}
+    .card:hover{transform:translateY(-6px);}
 
-    .steps{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;}
-    .step{max-width:250px;}
+    .steps{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;max-width:1100px;margin:2rem auto 0;}
+    .step{
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:2rem;
+      max-width:320px;
+      flex:1;
+    }
+
     .step-number{
       width:56px;height:56px;margin:0 auto 1rem;
       display:flex;justify-content:center;align-items:center;
@@ -164,159 +165,296 @@
       box-shadow:0 8px 20px rgba(0,229,255,.25);
     }
 
-    /* FAQ */
-    .faq-container{max-width:800px;margin:auto;text-align:left;}
-    .faq-item{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.1);
-      padding:1.5rem;border-radius:12px;margin-bottom:1rem;
-      transition:.3s;
-    }
-    .faq-item:hover{border-color:rgba(0,229,255,.3);}
-    .faq-question{display:flex;justify-content:space-between;cursor:pointer;color:var(--secondary);}
-    .faq-answer{display:none;margin-top:.8rem;opacity:.8;}
-    .faq-item.active .faq-answer{display:block;}
-
-    /* CTA */
-    .cta-section{
-      background:linear-gradient(180deg,#00151f,#000);
-      padding:100px 0;text-align:center;
+    /* Who it's for */
+    .who-card{
+      background:var(--card-bg);border:1px solid var(--border);
+      border-radius:14px;padding:1.3rem;
+      display:flex;gap:.9rem;align-items:center;justify-content:center;
     }
 
-    /* Footer */
+    .who-emoji{font-size:1.3rem;margin-right:.2rem;}
+
+    /* Plans */
+    .plans{max-width:1200px;margin:2.5rem auto 0;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;}
+    .plan{
+      border-radius:16px;padding:2rem;
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.12);
+      text-align:left;
+      position:relative;
+    }
+    .plan .badge{
+      position:absolute;top:16px;right:16px;
+      font-size:.8rem;padding:.35rem .6rem;border-radius:999px;
+      border:1px solid rgba(0,229,255,.35);
+      color:var(--secondary);
+      background:rgba(0,229,255,.08);
+    }
+
+    /* Why choose us */
+    .why-grid{max-width:1000px;margin:2rem auto 0;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;}
+    .why-item{
+      background:var(--glass);border:1px solid rgba(255,255,255,.12);
+      padding:1rem 1.1rem;border-radius:12px;
+      text-align:left;display:flex;gap:.6rem;
+    }
+    .why-item .tick{color:#7CFFA5;font-size:1.2rem;margin-top:.1rem;}
+
     footer{background:#000;color:#4aaec7;padding:60px 0 40px;text-align:center;}
-    .footer-links a{color:#4aaec7;text-decoration:none;}
-    .footer-links a:hover{color:#00E5FF;}
 
-    /* Smooth scroll reveal animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .reveal{opacity:0;transform:translateY(24px);transition:.9s;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
   </style>
 </head>
 <body>
 
-  <!-- Splash -->
-  <div id="splash"><img src="logo.png" alt="NearFuture AI logo"></div>
+<!-- Splash -->
+<div id="splash"><img src="logo.png" alt="NearFuture AI logo"></div>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="nav-container">
-      <img src="logoname.png" class="logo-img" alt="NearFuture AI">
-      <ul class="nav-links">
-        <li><a href="#home">Overview</a></li>
-        <li><a href="#about">How It Works</a></li>
-        <li><a href="#features">Capabilities</a></li>
-        <li><a href="#solutions">Use Cases</a></li>
-        <li><a href="#integrations">Workflow Automation</a></li>
-        <li><a href="#faq">Support Center</a></li>
+<!-- Navbar -->
+<nav>
+  <div class="nav-container">
+    <img src="logoname.png" class="logo-img" alt="NearFuture AI">
+    <ul class="nav-links">
+      <li><a href="#home">Overview</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#features">Capabilities</a></li>
+      <li><a href="#who">Who It’s For</a></li>
+      <li><a href="#plans">Plans</a></li>
+      <li><a href="#why">Why Us</a></li>
+    </ul>
+    <div class="nav-buttons">
+      <a href="https://m.me/nearfutureai" target="_blank" class="btn btn-secondary">Try Demo</a>
+      <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-primary">Book Call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO (GANDA VERSION) -->
+<section class="hero" id="home">
+  <img src="logo.png" class="hero-logo-top" alt="">
+  
+  <h1>Automate Your Sales on Messenger.<br>
+      Welcome to the <span>NearFuture</span>.</h1>
+
+  <p>
+    NearFuture AI turns your Facebook and Instagram inbox into a 24/7 sales engine.  
+    Qualify leads, process orders, and support customers—automatically and in their language.
+  </p>
+
+  <div class="hero-buttons">
+    <a href="https://m.me/nearfutureai" target="_blank" class="btn btn-primary">💬 Direct to Messenger</a>
+    <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-secondary">📅 Book a Free Demo</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="reveal">
+  <div class="section-title">
+    <h2>Simple Setup. Real Results.</h2>
+    <p>Start automating your Messenger in 3 easy steps.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>We Build Your Smart Bot</h3>
+      <p>We customize a full Messenger automation system that matches your products, menus, and business process.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Your Bot Starts Working 24/7</h3>
+      <p>Every message gets an instant reply — from order-taking to FAQs — even when you’re offline.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Watch Your Page Grow</h3>
+      <p>Get more orders, faster responses, and happier customers — all without hiring extra staff.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT OUR AUTOMATION DOES -->
+<section id="features" class="reveal" style="background:rgba(255,255,255,0.02);">
+  <div class="section-title">
+    <h2>What Our Automation Does</h2>
+    <p>Powerful, practical features designed to save time and grow sales.</p>
+  </div>
+
+  <div class="grid grid-4" style="max-width:1200px;margin:auto;">
+    <div class="card"><div class="icon">💬</div><h3>24/7 Auto-Reply</h3><p>Instant responses to every inquiry — day or night.</p></div>
+    <div class="card"><div class="icon">🛒</div><h3>Automated Orders</h3><p>Order inside Messenger — items, delivery info, confirmation.</p></div>
+    <div class="card"><div class="icon">📋</div><h3>Interactive Menus</h3><p>Buttons like Order Now, Change Language, Ask a Question.</p></div>
+    <div class="card"><div class="icon">🌐</div><h3>Multi-Language</h3><p>English, Filipino, Taglish — switches automatically.</p></div>
+
+    <div class="card"><div class="icon">📚</div><h3>FAQ Automation</h3><p>Answers prices, delivery areas, hours, payment methods.</p></div>
+    <div class="card"><div class="icon">🧾</div><h3>Order Confirmation</h3><p>Summary + unique ID sent after checkout.</p></div>
+    <div class="card"><div class="icon">📦</div><h3>Customer Data</h3><p>Save name, contact, and history for repeat orders.</p></div>
+    <div class="card"><div class="icon">📊</div><h3>Basic Analytics</h3><p>Track orders, trends, and peak hours.</p></div>
+
+    <div class="card"><div class="icon">🧼</div><h3>Complaints</h3><p>Collect issues (refunds, wrong items, delays) with details.</p></div>
+    <div class="card"><div class="icon">🏷️</div><h3>Smart Tagging</h3><p>Label new, returning, or pending customers.</p></div>
+    <div class="card"><div class="icon">📤</div><h3>Promo Broadcast</h3><p>Send promos, reminders, and announcements.</p></div>
+    <div class="card"><div class="icon">📅</div><h3>Appointments</h3><p>Let customers pick date/time/service easily.</p></div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section id="who" class="reveal">
+  <div class="section-title">
+    <h2>Who It’s For</h2>
+    <p>NearFuture AI is built for MSMEs and creators who want more time and less hassle.</p>
+  </div>
+
+  <div class="grid grid-3" style="max-width:1000px;margin:auto;">
+    <div class="who-card"><span class="who-emoji">🍔</span> Food & beverage businesses</div>
+    <div class="who-card"><span class="who-emoji">🛍️</span> Online sellers</div>
+    <div class="who-card"><span class="who-emoji">💆‍♀️</span> Salons & clinics</div>
+    <div class="who-card"><span class="who-emoji">🧰</span> Repair & service shops</div>
+    <div class="who-card"><span class="who-emoji">🏡</span> Real estate & inquiries</div>
+    <div class="who-card"><span class="who-emoji">🎥</span> Influencers & creators</div>
+    <div class="who-card" style="grid-column:1/-1;max-width:520px;margin:0 auto;">
+      <span class="who-emoji">💬</span> Local MSMEs of any kind
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section id="plans" class="reveal" style="background:rgba(255,255,255,0.02);">
+  <div class="section-title">
+    <h2>Plans</h2>
+    <p>We make automation easy — whether you're just starting or scaling.</p>
+  </div>
+
+  <div class="plans">
+    <div class="plan">
+      <span class="badge">Starter</span>
+      <h3>“Simple Automation Response”</h3>
+      <small>Perfect for small businesses.</small>
+
+      <ul>
+        <li>Auto-reply system</li>
+        <li>Order-taking flow</li>
+        <li>FAQs & menu flows</li>
+        <li>Multi-language support</li>
+        <li>Order confirmation messages</li>
+        <li>Customer database</li>
+        <li>Basic analytics</li>
       </ul>
-      <div class="nav-buttons">
-        <a href="https://m.me/nearfutureai" target="_blank" class="btn btn-secondary">Try Demo</a>
-        <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-primary">Book Call</a>
-      </div>
+
+      <a href="https://m.me/nearfutureai" class="btn btn-primary">💬 Message Us</a>
     </div>
-  </nav>
 
-  <!-- Hero -->
-  <section class="hero reveal" id="home">
-    <img src="logo.png" class="hero-logo-bg" alt="">
-    <h1>Automate Your Sales on Messenger.<br>Welcome to the <span style="color:var(--secondary);">NearFuture</span>.</h1>
-    <p>NearFuture AI turns your Facebook and Instagram inbox into a 24/7 sales engine. Qualify leads, process orders, and support customers—automatically and in their language.</p>
-    <div class="hero-buttons">
-      <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-primary">Get a Personalized Demo</a>
-      <a href="https://m.me/nearfutureai" target="_blank" class="btn btn-secondary">See It in Action</a>
+    <div class="plan">
+      <span class="badge">Pro</span>
+      <h3>“Advanced Automation for Growth”</h3>
+      <small>For scaling businesses.</small>
+
+      <ul>
+        <li>All Starter features</li>
+        <li>Advanced analytics dashboard</li>
+        <li>Auto customer tagging</li>
+        <li>Complaint & feedback tracking</li>
+        <li>Broadcasting & follow-ups</li>
+        <li>Appointment booking (optional)</li>
+        <li>Payment proof handling</li>
+        <li>Conversation memory</li>
+        <li>Priority setup & support</li>
+      </ul>
+
+      <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" class="btn btn-secondary">📅 Book a Free Demo</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Capabilities -->
-  <section id="features" class="reveal">
-    <div class="section-title">
-      <h2>Capabilities</h2>
-      <p>Everything you need to automate customer conversations and drive sales</p>
+<!-- WHY CHOOSE US -->
+<section id="why" class="reveal">
+  <div class="section-title">
+    <h2>Why Choose NearFuture AI</h2>
+    <p>Smart automation built for real businesses — not templates.</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-item"><span class="tick">✅</span><div>Hold human-like conversations — naturally and instantly</div></div>
+    <div class="why-item"><span class="tick">✅</span><div>Fully customize your bot to your business process</div></div>
+    <div class="why-item"><span class="tick">✅</span><div>Never miss a customer message ever again</div></div>
+    <div class="why-item"><span class="tick">✅</span><div>Help you sell more through fast, guided interactions</div></div>
+    <div class="why-item"><span class="tick">✅</span><div>Keep your data safe, secure, and accessible only to you</div></div>
+  </div>
+</section>
+
+<!-- SEE IT IN ACTION -->
+<section id="demo" class="cta-section reveal">
+  <h2>See It In Action</h2>
+  <p>Experience how a full order flow works inside Messenger — from greeting to confirmation.</p>
+
+  <div style="max-width:800px;margin:2rem auto;">
+    <div style="
+      width:100%;
+      height:400px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:12px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:1.2rem;
+      opacity:.7;">
+      🎥 Demo video coming soon
     </div>
-    <div class="features-grid">
-      <div class="feature-card reveal"><div class="feature-icon">💬</div><h3>24/7 Order Processing</h3><p>From browsing to checkout, all inside Messenger.</p></div>
-      <div class="feature-card reveal"><div class="feature-icon">🌐</div><h3>True Multilingual AI</h3><p>Communicate seamlessly across languages.</p></div>
-      <div class="feature-card reveal"><div class="feature-icon">📱</div><h3>Facebook & Instagram Native</h3><p>Works where your customers already are.</p></div>
-      <div class="feature-card reveal"><div class="feature-icon">🔥</div><h3>Intelligent Lead Scoring</h3><p>Identify and prioritize hot leads automatically.</p></div>
-      <div class="feature-card reveal"><div class="feature-icon">⚡</div><h3>24/7 Instant Support</h3><p>Automated FAQs and customer support anytime.</p></div>
-      <div class="feature-card reveal"><div class="feature-icon">🔧</div><h3>Built on Make.ai</h3><p>Enterprise-grade automation, no code needed.</p></div>
-    </div>
-  </section>
+  </div>
 
-  <!-- How It Works -->
-  <section id="about" class="reveal" style="background:rgba(255,255,255,0.02);">
-    <div class="section-title"><h2>How It Works</h2><p>Get started in three simple steps</p></div>
-    <div class="steps">
-      <div class="step reveal"><div class="step-number">1</div><h3>Connect</h3><p>Link your Facebook Page and add your details.</p></div>
-      <div class="step reveal"><div class="step-number">2</div><h3>Train</h3><p>We configure the AI with your tone and workflow.</p></div>
-      <div class="step reveal"><div class="step-number">3</div><h3>Convert</h3><p>Automate up to 80% of conversations and watch sales grow.</p></div>
-    </div>
-  </section>
+  <div class="hero-buttons" style="margin-top:2rem;">
+    <a href="https://m.me/nearfutureai" target="_blank" class="btn btn-primary">💬 Try the Demo Bot</a>
+    <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-secondary">📅 Book a Free Setup Walkthrough</a>
+  </div>
+</section>
 
-  <!-- Use Cases -->
-  <section id="solutions" class="reveal">
-    <div class="section-title"><h2>Use Cases</h2><p>Industry-specific solutions that drive results</p></div>
-    <div class="features-grid">
-      <div class="feature-card reveal"><h3>E-commerce & D2C Brands</h3><p>Handle inquiries, reduce cart abandonment, track orders.</p></div>
-      <div class="feature-card reveal"><h3>Lead-Based Businesses</h3><p>Qualify leads, book appointments, send follow-ups.</p></div>
-      <div class="feature-card reveal"><h3>Local Services</h3><p>Let customers book and get quotes anytime.</p></div>
-    </div>
-  </section>
+<!-- CTA BOTTOM -->
+<section class="cta-section reveal" id="cta">
+  <h2>Ready to Automate Your Messenger?</h2>
+  <p>Let your page handle orders while you sleep.</p>
 
-  <!-- Support Center -->
-  <section id="faq" class="reveal" style="background:rgba(255,255,255,0.02);">
-    <div class="section-title"><h2>Support Center</h2><p>Everything you need to know about NearFuture AI</p></div>
-    <div class="faq-container">
-      <div class="faq-item reveal"><div class="faq-question"><span>How many languages does it support?</span><span>+</span></div><div class="faq-answer"><p>Over 50 languages including English, Spanish, Filipino, Arabic, and more.</p></div></div>
-      <div class="faq-item reveal"><div class="faq-question"><span>Can it handle complex orders?</span><span>+</span></div><div class="faq-answer"><p>Yes, it can process inquiries, check inventory, and manage returns.</p></div></div>
-      <div class="faq-item reveal"><div class="faq-question"><span>Is it no-code?</span><span>+</span></div><div class="faq-answer"><p>Yes — built on Make.ai, no coding required.</p></div></div>
-      <div class="faq-item reveal"><div class="faq-question"><span>How is it different from ManyChat?</span><span>+</span></div><div class="faq-answer"><p>NearFuture AI understands intent and supports multilingual automation.</p></div></div>
-    </div>
-  </section>
+  <div class="hero-buttons" style="margin-top:2rem;">
+    <a href="https://m.me/nearfutureai" target="_blank" class="btn btn-primary">💬 Message Us on Messenger</a>
+    <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-secondary">📅 Book a Free Demo</a>
+  </div>
+</section>
 
-  <!-- CTA -->
-  <section class="cta-section reveal">
-    <h2>Ready to Automate Your Growth?</h2>
-    <p>Book a free consultation and see how NearFuture AI transforms your sales.</p>
-    <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" target="_blank" class="btn btn-primary">Schedule Your Free Consultation</a>
-  </section>
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 NearFuture AI. Smart chat automation for modern businesses.</p>
+  <p style="margin-top:.5rem;opacity:.7;">
+    <a href="https://facebook.com/nearfutureai" style="color:#4aaec7;text-decoration:none;">Facebook</a> •
+    <a href="https://m.me/nearfutureai" style="color:#4aaec7;text-decoration:none;">Messenger</a> •
+    <a href="mailto:nearfutureai@gmail.com" style="color:#4aaec7;text-decoration:none;">Email</a> •
+    <a href="https://calendar.app.google/7nUmhEcf6UTc6AJA8" style="color:#4aaec7;text-decoration:none;">Book Demo</a>
+  </p>
+</footer>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 NearFuture AI. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // FAQ toggle
-    document.querySelectorAll('.faq-question').forEach(q=>{
-      q.addEventListener('click',()=>{
-        const item=q.parentElement;
-        item.classList.toggle('active');
+<!-- JS: Scroll Reveal -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll(".reveal");
+    const onScroll = () => {
+      const trigger = window.innerHeight * 0.88;
+      reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < trigger) el.classList.add("visible");
       });
-    });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  });
+</script>
 
-    // Scroll reveal
-    document.addEventListener("DOMContentLoaded", () => {
-      const reveals = document.querySelectorAll(".reveal");
-      const revealOnScroll = () => {
-        const triggerPoint = window.innerHeight * 0.85;
-        reveals.forEach((el) => {
-          const rect = el.getBoundingClientRect().top;
-          if (rect < triggerPoint) el.classList.add("visible");
-        });
-      };
-      window.addEventListener("scroll", revealOnScroll);
-      revealOnScroll();
-    });
-  </script>
 </body>
 </html>
+
+
+
